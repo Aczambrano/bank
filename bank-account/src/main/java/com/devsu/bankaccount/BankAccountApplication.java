@@ -1,4 +1,4 @@
-package com.devsu.bank_account;
+package com.devsu.bankaccount;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
