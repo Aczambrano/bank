@@ -17,15 +17,15 @@ public class UpdateMovementUseCase {
     }
 
     public Movement execute(Movement movement) {
-        return movementRepository.findByAccountId(movement.getAccountId())
+        return movementRepository.findById(movement.getMovementId())
                 .map(existingMovement -> {
                     existingMovement.setMovementType(movement.getMovementType());
                     existingMovement.setValue(movement.getValue());
-                    existingMovement.setBalance(movement.getBalance());
-                    existingMovement.setDate(LocalDateTime.now());
+                    //existingMovement.setBalance(movement.getBalance());
+                    //existingMovement.setDate(LocalDateTime.now());
                     return movementRepository.update(existingMovement);
                 })
-                .orElseThrow(() -> new NoSuchElementException("The movement with the given account id does not exist."));
+                .orElseThrow(() -> new NoSuchElementException("The movement with the given id does not exist."));
     }
 
 }
