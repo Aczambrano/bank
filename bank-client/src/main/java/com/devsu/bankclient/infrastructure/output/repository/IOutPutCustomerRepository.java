@@ -10,6 +10,5 @@ public interface IOutPutCustomerRepository extends JpaRepository<CustomerEntity,
     Optional<CustomerEntity> findById(Integer id);
     Optional<CustomerEntity> findByIdentification(String identification);
     List<CustomerEntity> findAll();
-    //CustomerEntity update(CustomerEntity customerEntity);
 
 }
