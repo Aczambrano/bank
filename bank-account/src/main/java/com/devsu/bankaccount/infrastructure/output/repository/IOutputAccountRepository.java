@@ -10,5 +10,5 @@ public interface IOutputAccountRepository extends JpaRepository<AccountEntity, I
     Optional<AccountEntity> findById(Integer id);
     Optional<AccountEntity> findByAccountNumber(String accountNumber);
     List<AccountEntity> findAll();
-    Optional<AccountEntity> findByCustomerId(Integer id);
+    List<AccountEntity> findByCustomerId(Integer id);
 }

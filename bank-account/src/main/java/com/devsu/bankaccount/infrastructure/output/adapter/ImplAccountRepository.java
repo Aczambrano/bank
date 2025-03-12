@@ -68,8 +68,10 @@ public class ImplAccountRepository implements IAccountRepository {
     }
 
     @Override
-    public Optional<Account> findByCustomerId(Integer customerId) {
-        Optional<AccountEntity> accountEntity = accountRepository.findByCustomerId(customerId);
-        return accountEntity.map(AccountMapper::entityToAccount);
+    public List<Account> findByCustomerId(Integer customerId) {
+        List<AccountEntity> accountEntities = accountRepository.findByCustomerId(customerId);
+        return accountEntities.stream()
+                .map(AccountMapper::entityToAccount)
+                .collect(Collectors.toList());
     }
 }

@@ -11,5 +11,5 @@ public interface IAccountRepository {
     Optional<Account>  findByAccountNumber(String accountNumber);
     Account save(Account account);
     Account update(Account account);
-    Optional<Account> findByCustomerId(Integer customerId);
+    List<Account> findByCustomerId(Integer customerId);
 }

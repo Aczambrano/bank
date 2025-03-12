@@ -5,8 +5,11 @@ import com.devsu.bankaccount.domain.model.Movement;
 import com.devsu.bankaccount.infrastructure.output.entity.MovementEntity;
 import com.devsu.bankaccount.infrastructure.output.mapper.MovementMapper;
 import com.devsu.bankaccount.infrastructure.output.repository.IOutputMovementRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -63,7 +66,7 @@ public class ImplMovementRepository implements IMovementrepository {
             movementRepository.save(updatedEntity);
             return MovementMapper.entityToMovement(updatedEntity);
         } else {
-            throw new RuntimeException("Movement not found");
+            throw new EntityNotFoundException("Movement not found");
         }
     }
 
@@ -75,8 +78,17 @@ public class ImplMovementRepository implements IMovementrepository {
             movementRepository.delete(existingEntity.get());
             return transaction;
         } else {
-            throw new RuntimeException("Movement not found");
+            throw new EntityNotFoundException("Movement not found");
         }
+    }
+
+    @Override
+    public List<Movement> findByAccount_AccountIdAndDateBetween(Integer accountId, LocalDateTime startDate, LocalDateTime endDate) {
+        List<MovementEntity> reportEntity = movementRepository.findByAccount_AccountIdAndDateBetween(accountId,startDate,endDate);
+
+        return reportEntity.stream()
+                .map(MovementMapper::entityToMovement)
+                .collect(Collectors.toList());
     }
 
 }

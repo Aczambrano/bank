@@ -1,8 +1,11 @@
 package com.devsu.bankaccount.infrastructure.input.mapper;
 
+import com.devsu.bankaccount.application.dto.AccountStatementReport;
 import com.devsu.bankaccount.domain.model.Movement;
 import com.devsu.bankaccount.infrastructure.input.dto.MovementRequestDTO;
 import com.devsu.bankaccount.infrastructure.input.dto.MovementResponseDTO;
+import com.devsu.bankaccount.infrastructure.input.dto.ReportRequestDTO;
+import com.devsu.bankaccount.infrastructure.input.dto.ReportResponseDTO;
 
 public class MovementDTOMapper {
 
@@ -23,6 +26,13 @@ public class MovementDTOMapper {
                 movement.getMovementType(),
                 movement.getValue(),
                 movement.getBalance()
+        );
+    }
+
+    public static ReportResponseDTO toReportResponseDTO(AccountStatementReport report) {
+        return new ReportResponseDTO(
+                report.getCustomerId(),
+                report.getAccounts()
         );
     }
 }
