@@ -1,9 +1,11 @@
 package com.devsu.bankaccount.application.port.input.account;
 
 import com.devsu.bankaccount.application.port.ouput.IAccountRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
+@Service
 public class DeleteAccountUseCase {
 
     private final IAccountRepository accountRepository;

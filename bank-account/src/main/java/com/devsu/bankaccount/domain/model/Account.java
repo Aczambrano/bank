@@ -16,7 +16,7 @@ public class Account {
 
     private Integer customerId;
 
-    private List<Transaction> transactions;
+    private List<Movement> movements;
 
     public Account(Integer accountId, String accountNumber, String accountType, BigDecimal initialBalance, Boolean status, Integer customerId) {
         this.accountId = accountId;
@@ -27,14 +27,15 @@ public class Account {
         this.customerId = customerId;
     }
 
-    public Account(Integer accountId, String accountNumber, String accountType, BigDecimal initialBalance, Boolean status, Integer customerId, List<Transaction> transactions) {
+    public Account(Integer accountId, String accountNumber, String accountType, BigDecimal initialBalance, Boolean status,
+                   Integer customerId, List<Movement> movements) {
         this.accountId = accountId;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.initialBalance = initialBalance;
         this.status = status;
         this.customerId = customerId;
-        this.transactions = transactions;
+        this.movements = movements;
     }
 
     public Account() {
@@ -88,11 +89,11 @@ public class Account {
         this.customerId = customerId;
     }
 
-    public List<Transaction> getTransactions() {
-        return transactions;
+    public List<Movement> getMovements() {
+        return movements;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
+    public void setMovements(List<Movement> movements) {
+        this.movements = movements;
     }
 }

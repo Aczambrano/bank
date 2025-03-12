@@ -5,7 +5,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("classpath:rabbit-application.properties")
+@PropertySource("classpath:rabbit.properties")
 public class RabbitProperties {
 
     @Value("${customer.exchange.name}")

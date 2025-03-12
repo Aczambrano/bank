@@ -3,10 +3,12 @@ package com.devsu.bankaccount.application.port.input.account;
 import com.devsu.bankaccount.application.port.ouput.IAccountRepository;
 import com.devsu.bankaccount.application.port.ouput.IRabbitMessage;
 import com.devsu.bankaccount.domain.model.Account;
+import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@Service
 public class UpdateAccountUseCase {
     private final IAccountRepository accountRepository;
     private final IRabbitMessage rabbitMessage;
