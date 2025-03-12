@@ -8,7 +8,9 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class RabbitConfig {
 
     private final RabbitProperties rabbitProperties;
@@ -21,7 +23,6 @@ public class RabbitConfig {
     public TopicExchange customerExchange() {
         return new TopicExchange(rabbitProperties.getCustomerExchange(), true, false);
     }
-
 
     @Bean
     public Queue customerQueue() {

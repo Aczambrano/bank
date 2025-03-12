@@ -21,9 +21,11 @@ public class BusListener implements IRabbitListener {
     @RabbitListener(queues = "#{rabbitProperties.getCustomerQueue()}")
     public Object receiveMessage(Integer request) {
 
-        return getCustomerByIdUseCase.execute(request)
+        Integer opt = getCustomerByIdUseCase.execute(request)
                 .map(Customer::getCustomerId)
                 .orElse(null);
+        System.out.println(opt);
+        return opt;
     }
 
 }

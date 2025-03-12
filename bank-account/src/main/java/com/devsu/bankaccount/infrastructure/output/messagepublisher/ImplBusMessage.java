@@ -19,7 +19,7 @@ public class ImplBusMessage implements IRabbitMessage {
     @Override
     public Object sendMessage(Integer request) {
 
-        Object response = rabbitTemplate.convertSendAndReceive(
+         Object response = rabbitTemplate.convertSendAndReceive(
                 rabbitEnvProperties.getCustomerExchange(),
                 rabbitEnvProperties.getCustomerRoutingKey(),
                 request
