@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter
@@ -14,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ReportResponseDTO {
 
-    private Integer customerId;
-    private List<AccountReport> accounts;
+        private Integer customerId;
+        private List<AccountReport> accounts;
 
 }

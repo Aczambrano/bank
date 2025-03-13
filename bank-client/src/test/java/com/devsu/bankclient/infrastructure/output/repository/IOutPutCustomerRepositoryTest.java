@@ -33,6 +33,37 @@ public class IOutPutCustomerRepositoryTest {
     }
 
     @Test
+    void testCreateCustomer() {
+        CustomerEntity newCustomer = new CustomerEntity();
+        newCustomer.setName("Jane Smith");
+        newCustomer.setIdentification("67890");
+        newCustomer.setPassword("password456");
+        newCustomer.setStatus(true);
+
+        CustomerEntity savedCustomer = customerRepository.save(newCustomer);
+        assertNotNull(savedCustomer);
+        assertEquals("Jane Smith", savedCustomer.getName());
+        assertEquals("67890", savedCustomer.getIdentification());
+    }
+
+    @Test
+    void testUpdateCustomer() {
+        customerEntity.setName("John Updated");
+        customerEntity.setPassword("newPassword123");
+
+        CustomerEntity updatedCustomer = customerRepository.save(customerEntity);
+        assertEquals("John Updated", updatedCustomer.getName());
+        assertEquals("newPassword123", updatedCustomer.getPassword());
+    }
+
+    @Test
+    void testDeleteCustomer() {
+        customerEntity.setStatus(false);
+        CustomerEntity updatedCustomer = customerRepository.save(customerEntity);
+        assertFalse(updatedCustomer.getStatus());
+    }
+
+    @Test
     void testFindById() {
         Optional<CustomerEntity> foundCustomer = customerRepository.findById(1);
         assertTrue(foundCustomer.isPresent());

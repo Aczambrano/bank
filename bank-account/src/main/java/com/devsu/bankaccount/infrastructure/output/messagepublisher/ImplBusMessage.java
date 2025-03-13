@@ -5,6 +5,8 @@ import com.devsu.bankaccount.application.port.ouput.IRabbitMessage;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ImplBusMessage implements IRabbitMessage {
 
@@ -25,15 +27,14 @@ public class ImplBusMessage implements IRabbitMessage {
                 request
         );
 
-        if (response != null) {
+         return Optional.ofNullable(response)
+                 .map(r-> {
+                     if (r instanceof Integer) {
+                         return (Integer)r;
+                     }
+                     throw new IllegalStateException("Unexpected response type from bus: " + response.getClass().getName());
 
-            if (response instanceof Integer) {
-                return (Integer) response;
-            }else {
-                throw new IllegalStateException("Unexpected response type from bus: " + response.getClass().getName());
-            }
-        }
-        return null;
+                 }).orElse(null);
     }
 
 }

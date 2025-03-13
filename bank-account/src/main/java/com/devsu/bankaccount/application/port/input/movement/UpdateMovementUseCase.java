@@ -21,8 +21,6 @@ public class UpdateMovementUseCase {
                 .map(existingMovement -> {
                     existingMovement.setMovementType(movement.getMovementType());
                     existingMovement.setValue(movement.getValue());
-                    //existingMovement.setBalance(movement.getBalance());
-                    //existingMovement.setDate(LocalDateTime.now());
                     return movementRepository.update(existingMovement);
                 })
                 .orElseThrow(() -> new NoSuchElementException("The movement with the given id does not exist."));

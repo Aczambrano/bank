@@ -12,10 +12,7 @@ import com.devsu.bankaccount.infrastructure.input.dto.MovementResponseDTO;
 import com.devsu.bankaccount.infrastructure.input.dto.ReportResponseDTO;
 import com.devsu.bankaccount.infrastructure.input.mapper.MovementDTOMapper;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,17 +40,17 @@ public class MovementHandler {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public MovementResponseDTO createMovement(@RequestBody MovementRequestDTO movementRequestDTO) {
+    public MovementResponseDTO createMovement(MovementRequestDTO movementRequestDTO) {
         Movement movement = MovementDTOMapper.toMovement(movementRequestDTO);
         return MovementDTOMapper.toMovementResponseDTO(createMovementUseCase.execute(movement));
     }
 
-    public MovementResponseDTO updateMovement(@RequestBody MovementRequestDTO movementRequestDTO) {
+    public MovementResponseDTO updateMovement(MovementRequestDTO movementRequestDTO) {
         Movement movement = MovementDTOMapper.toMovement(movementRequestDTO);
         return MovementDTOMapper.toMovementResponseDTO(updateMovementUseCase.execute(movement));
     }
 
-    public void deleteMovement(@PathVariable Integer movementId) {
+    public void deleteMovement(Integer movementId) {
         deleteMovementUseCase.execute(movementId);
     }
 

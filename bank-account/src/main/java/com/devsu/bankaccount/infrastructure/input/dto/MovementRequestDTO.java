@@ -1,6 +1,7 @@
 package com.devsu.bankaccount.infrastructure.input.dto;
 
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -16,12 +17,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MovementRequestDTO {
-    //@NotNull(message = "Account ID cannot be null")
+    @NotNull(message = "Account ID cannot be null")
     private Integer accountId;
 
     private Integer movementId;
 
-    @NotNull(message = "Movement type cannot be null")
+    @NotBlank(message = "Movement type cannot be null")
     @Pattern(regexp = "Deposit|Withdrawal", message = "Type movement must be Deposit, Withdrawal")
     private String movementType;
 

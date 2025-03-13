@@ -4,7 +4,6 @@ import com.devsu.bankaccount.application.dto.AccountStatementReport;
 import com.devsu.bankaccount.domain.model.Movement;
 import com.devsu.bankaccount.infrastructure.input.dto.MovementRequestDTO;
 import com.devsu.bankaccount.infrastructure.input.dto.MovementResponseDTO;
-import com.devsu.bankaccount.infrastructure.input.dto.ReportRequestDTO;
 import com.devsu.bankaccount.infrastructure.input.dto.ReportResponseDTO;
 
 public class MovementDTOMapper {
@@ -23,6 +22,7 @@ public class MovementDTOMapper {
         return new MovementResponseDTO(
                 movement.getMovementId(),
                 movement.getAccountId(),
+                movement.getDate(),
                 movement.getMovementType(),
                 movement.getValue(),
                 movement.getBalance()

@@ -10,7 +10,6 @@ public class Movement {
     private BigDecimal value;
     private BigDecimal balance;
     private Integer accountId;
-    private Account account;
 
     public Movement(){}
 
@@ -63,11 +62,4 @@ public class Movement {
         this.accountId = accountId;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

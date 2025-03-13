@@ -25,44 +25,44 @@ public class ImplMovementRepository implements IMovementrepository {
 
     @Override
     public List<Movement> findAll() {
-        List<MovementEntity> transactionEntities = movementRepository.findAll();
-        return transactionEntities.stream()
+        List<MovementEntity> movementEntities = movementRepository.findAll();
+        return movementEntities.stream()
                 .map(MovementMapper::entityToMovement)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Movement> findById(Integer id) {
-        Optional<MovementEntity> transactionEntity = movementRepository.findById(id);
-        return transactionEntity.map(MovementMapper::entityToMovement);
+        Optional<MovementEntity> movementEntity = movementRepository.findById(id);
+        return movementEntity.map(MovementMapper::entityToMovement);
     }
 
     @Override
     public Optional<Movement> findByAccountId(Integer accountId) {
-        List<MovementEntity> transactionEntities = movementRepository.findByAccount_AccountId(accountId);
-        if (transactionEntities.isEmpty()) {
+        List<MovementEntity> movementEntities = movementRepository.findByAccount_AccountId(accountId);
+        if (movementEntities.isEmpty()) {
             return Optional.empty();
         }
-        return Optional.of(MovementMapper.entityToMovement(transactionEntities.get(0)));
+        return Optional.of(MovementMapper.entityToMovement(movementEntities.get(0)));
     }
 
     @Override
-    public Movement save(Movement transaction) {
-        MovementEntity transactionEntity = MovementMapper.movementToEntity(transaction);
-        MovementEntity savedEntity = movementRepository.save(transactionEntity);
+    public Movement save(Movement movement) {
+        MovementEntity movementEntity = MovementMapper.movementToEntity(movement);
+        MovementEntity savedEntity = movementRepository.save(movementEntity);
         return MovementMapper.entityToMovement(savedEntity);
     }
 
     @Override
-    public Movement update(Movement transaction) {
-        Optional<MovementEntity> existingEntity = movementRepository.findById(transaction.getMovementId());
+    public Movement update(Movement movement) {
+        Optional<MovementEntity> existingEntity = movementRepository.findById(movement.getMovementId());
 
         if (existingEntity.isPresent()) {
             MovementEntity updatedEntity = existingEntity.get();
-            updatedEntity.setDate(transaction.getDate());
-            updatedEntity.setMovementType(transaction.getMovementType());
-            updatedEntity.setValue(transaction.getValue());
-            updatedEntity.setBalance(transaction.getBalance());
+            updatedEntity.setDate(movement.getDate());
+            updatedEntity.setMovementType(movement.getMovementType());
+            updatedEntity.setValue(movement.getValue());
+            updatedEntity.setBalance(movement.getBalance());
             movementRepository.save(updatedEntity);
             return MovementMapper.entityToMovement(updatedEntity);
         } else {
@@ -71,12 +71,12 @@ public class ImplMovementRepository implements IMovementrepository {
     }
 
     @Override
-    public Movement delete(Movement transaction) {
-        Optional<MovementEntity> existingEntity = movementRepository.findById(transaction.getMovementId());
+    public Movement delete(Movement movement) {
+        Optional<MovementEntity> existingEntity = movementRepository.findById(movement.getMovementId());
 
         if (existingEntity.isPresent()) {
             movementRepository.delete(existingEntity.get());
-            return transaction;
+            return movement;
         } else {
             throw new EntityNotFoundException("Movement not found");
         }

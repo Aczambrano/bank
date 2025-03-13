@@ -24,7 +24,7 @@ public class AccountRequestDTO {
     @DecimalMin(value = "0.0", inclusive = true, message = "Initial balance must be a positive number")
     private BigDecimal initialBalance;
 
-    @NotNull(message = "Status cannot be null")
+    @NotBlank(message = "Status cannot be null")
     private Boolean status;
 
     @NotNull(message = "Customer ID cannot be null")

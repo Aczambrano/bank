@@ -6,14 +6,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDateTime;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountReport {
-    private String accountNumber;
+@Getter
+@Setter
+public class MovementReportDTO {
+
+    private Integer movementId;
+    private Integer accountId;
+    private LocalDateTime date;
+    private String movementType;
+    private BigDecimal value;
     private BigDecimal balance;
-    private List<MovementReportDTO> movements;
+
 }
