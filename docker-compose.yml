@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  mysql_bank_db:
+    image: mysql:latest 
+    container_name: mysql_bank_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bank
+    ports:
+      - "3306:3306"
+    networks:
+      - microservice-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      retries: 10
+      timeout: 15s
+
+  customer-microservice:
+    build:
+      context: ./bank-client
+      dockerfile: Dockerfile 
+    container_name: customer-microservice
+    depends_on:
+      mysql_bank_db:
+        condition: service_healthy 
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_bank_db:3306/bank?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8082:8082" 
+    networks:
+      - microservice-network
+
+  account-microservice:
+    build:
+      context: ./bank-account
+      dockerfile: Dockerfile 
+    container_name: account-microservice
+    depends_on:
+      mysql_bank_db:
+        condition: service_healthy 
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_bank_db:3306/bank?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8081:8081" 
+    networks:
+      - microservice-network
+
+networks:
+  microservice-network:
+    driver: bridge
